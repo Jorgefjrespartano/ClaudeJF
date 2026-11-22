@@ -1,0 +1,446 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>PIC BA · Visão Geral</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --navy:#0A1F3D; --navy-2:#11315C; --navy-3:#183E70;
+    --ink:#1C222C; --graphite:#2E3440; --muted:#5D6776; --faint:#8A93A1;
+    --line:#DCE2EA; --bg:#EEF1F5; --card:#FFFFFF;
+    --gold:#C9A24B; --gold-soft:#F7F0DC; --gold-ink:#8A6A1F;
+    --cyan:#18A8C8; --cyan-soft:#E2F4F8; --cyan-ink:#0D6F86;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%;background:#D9DEE5;color:var(--ink);
+    font-family:Inter,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+    -webkit-font-smoothing:antialiased;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+  body{overflow:hidden}
+  svg.i{width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;flex:none}
+
+  /* ---------- Palco 16:9 ---------- */
+  .stage{position:relative;width:100vw;height:100vh}
+  .canvas{position:absolute;left:50%;top:50%;width:1600px;height:900px;background:var(--bg);
+    transform:translate(-50%,-50%) scale(var(--s,1));transform-origin:center;
+    box-shadow:0 20px 60px rgba(10,31,61,.25);overflow:hidden}
+
+  /* ---------- Cabeçalho ---------- */
+  .hero{position:absolute;inset:0 0 auto 0;height:148px;color:#fff;
+    background:linear-gradient(115deg,var(--navy) 0%,var(--navy-2) 62%,var(--navy-3) 100%);
+    padding:16px 28px 0}
+  .hero::after{content:"";position:absolute;left:0;right:0;bottom:0;height:3px;
+    background:linear-gradient(90deg,var(--gold) 0 34%,var(--cyan) 34% 100%)}
+  .hero-top{display:flex;justify-content:space-between;align-items:center;height:20px;
+    font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+  .hero-top .k{color:var(--gold)}
+  .hero-top .d{color:#A9B7CC;margin-right:178px}
+  .hero-main{display:grid;grid-template-columns:420px 1fr 318px;gap:26px;align-items:center;height:108px}
+  .brand h1{font-size:60px;line-height:1;font-weight:800;letter-spacing:-.02em;display:flex;align-items:baseline;gap:14px}
+  .brand h1 .tag{font-size:11px;font-weight:700;letter-spacing:.12em;color:var(--navy);background:var(--gold);
+    padding:4px 8px;border-radius:3px;transform:translateY(-10px)}
+  .brand p{font-size:17px;color:#D5DEEA;margin-top:8px;font-weight:500}
+  .why{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  .why .box{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.10);border-left:3px solid var(--cyan);
+    border-radius:6px;padding:11px 14px}
+  .why .box.p{border-left-color:var(--gold)}
+  .why h3{display:flex;align-items:center;gap:7px;font-size:10.5px;letter-spacing:.14em;font-weight:700;color:#9FD9E8;margin-bottom:5px}
+  .why .box.p h3{color:#E6CC8C}
+  .why h3 svg{width:15px;height:15px}
+  .why p{font-size:13px;line-height:1.42;color:#EAF0F7}
+  .stat{border-left:1px solid rgba(255,255,255,.16);padding-left:24px}
+  .stat .n{font-size:44px;font-weight:800;color:var(--gold);line-height:1;letter-spacing:-.02em}
+  .stat .l{font-size:13.5px;font-weight:600;margin-top:6px}
+  .stat .s{font-size:12px;color:#B9C6D8;margin-top:3px}
+  .stat .src{font-size:10px;color:#8798B0;margin-top:5px}
+
+  .print-btn{position:absolute;top:10px;right:18px;z-index:5;display:flex;align-items:center;gap:7px;
+    font:600 11.5px/1 Inter,system-ui,sans-serif;color:#E7EDF5;background:rgba(255,255,255,.08);
+    border:1px solid rgba(255,255,255,.22);border-radius:5px;padding:6px 10px;cursor:pointer;transition:.15s}
+  .print-btn:hover{background:var(--gold);color:var(--navy);border-color:var(--gold)}
+  .print-btn svg{width:14px;height:14px}
+
+  /* ---------- Corpo ---------- */
+  .body{position:absolute;top:160px;left:28px;right:28px;height:710px;display:grid;
+    grid-template-columns:1100px 1fr;grid-template-rows:412px 284px;gap:14px}
+  .card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:13px 20px 14px;position:relative;display:flex;flex-direction:column}
+  .sec{display:flex;align-items:center;gap:10px;margin-bottom:8px}
+  .sec .num{font-size:11px;font-weight:800;color:#fff;background:var(--navy);border-radius:4px;padding:4px 6px;letter-spacing:.04em}
+  .sec h2{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--navy)}
+  .sec .sub{font-size:12px;color:var(--muted);margin-left:auto}
+  .lane{display:flex;align-items:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.14em;
+    text-transform:uppercase;color:var(--muted);margin:0 0 6px}
+  .lane::after{content:"";flex:1;height:1px;background:var(--line)}
+  .lane svg{width:14px;height:14px;color:var(--cyan)}
+
+  /* Fluxo */
+  .row5{display:grid;grid-template-columns:1fr 34px 1fr 34px 1fr 34px 1fr 34px 1fr;align-items:stretch}
+  .arr{display:flex;align-items:center;justify-content:center;color:var(--cyan)}
+  .arr svg{width:26px;height:14px}
+  .step{border:1px solid var(--line);border-top:3px solid var(--cyan);border-radius:8px;padding:9px 11px 10px;background:#FBFCFD}
+  .step .hd{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+  .ico{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;background:var(--cyan-soft);color:var(--cyan-ink);flex:none}
+  .ico svg{width:16px;height:16px}
+  .step .no{font-size:10px;font-weight:800;color:var(--faint);letter-spacing:.08em}
+  .step h4{font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.15}
+  .step ul{list-style:none;display:grid;gap:3px}
+  .step li{font-size:11.8px;line-height:1.35;color:var(--graphite);padding-left:11px;position:relative}
+  .step li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;border-radius:50%;background:var(--cyan)}
+  .step li.loop{color:var(--gold-ink);font-weight:600;background:var(--gold-soft);border-radius:4px;padding:3px 6px 3px 6px;margin-top:2px;display:flex;gap:5px;align-items:center}
+  .step li.loop::before{display:none}
+  .step li.loop svg{width:12px;height:12px}
+  .bus{position:relative;height:34px;margin-bottom:2px}
+  .bus svg{position:absolute;inset:0;width:100%;height:100%}
+  .bus .lbl{position:absolute;left:104px;top:17px;
+    font-size:11px;font-weight:600;color:var(--cyan-ink);white-space:nowrap}
+  .node{background:var(--navy);color:#fff;border-radius:8px;padding:8px 10px;display:flex;gap:9px;align-items:center;min-height:54px}
+  .node .ico{background:rgba(24,168,200,.18);color:#7FD6EA}
+  .node b{display:block;font-size:12.8px;font-weight:700;line-height:1.2}
+  .node span{display:block;font-size:11px;color:#BFCBDB;line-height:1.3;margin-top:2px}
+  .node.auth{background:linear-gradient(135deg,var(--navy),#2A2A1E);box-shadow:inset 0 0 0 2px var(--gold)}
+  .node.auth .ico{background:rgba(201,162,75,.2);color:var(--gold)}
+  .outs{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:auto}
+  .out{display:flex;align-items:center;gap:8px;font-size:11.5px;color:var(--graphite);background:var(--bg);border-radius:6px;padding:7px 10px;line-height:1.3}
+  .out svg{width:16px;height:16px;color:var(--cyan-ink)}
+  .out b{color:var(--ink)}
+
+  /* Atores */
+  .actors .list{display:grid;gap:6px}
+  .actor{display:grid;grid-template-columns:30px 1fr;gap:10px;align-items:center;padding:5px 10px 5px 8px;border-radius:7px;
+    background:#FBFCFD;border:1px solid var(--line);border-left:3px solid var(--graphite)}
+  .actor .ico{width:30px;height:30px}
+  .actor b{display:block;font-size:12.8px;font-weight:700;line-height:1.2}
+  .actor span{display:block;font-size:11.3px;color:var(--muted);line-height:1.3;margin-top:1px}
+  .actor.t{border-left-color:var(--cyan)}
+  .actor.a{border-left-color:var(--gold)}
+  .actor.a .ico{background:var(--gold-soft);color:var(--gold-ink)}
+  .actor.p .ico{background:#ECEEF2;color:var(--graphite)}
+  .legend{display:flex;gap:12px;margin-left:auto;font-size:10.5px;color:var(--muted)}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:2px;margin-right:4px;vertical-align:-1px}
+  .integ{margin-top:auto;display:flex;gap:9px;align-items:center;background:var(--navy);color:#E6ECF4;border-radius:7px;padding:8px 11px;font-size:11.4px;line-height:1.35}
+  .integ svg{color:var(--gold);width:18px;height:18px}
+  .integ b{color:#fff}
+
+  /* Fases */
+  .timeline{position:relative;height:30px;margin:2px 0 6px}
+  .timeline .rail{position:absolute;left:0;right:0;top:14px;height:2px;background:linear-gradient(90deg,var(--cyan),var(--navy))}
+  .timeline .dots{position:absolute;inset:0;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+  .timeline .dot{display:flex;align-items:center;gap:8px}
+  .timeline .dot em{font-style:normal;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-size:12px;font-weight:800;
+    display:grid;place-items:center;box-shadow:0 0 0 4px #fff}
+  .timeline .dot.hl em{background:var(--gold);color:var(--navy)}
+  .timeline .dot small{background:#fff;padding:0 6px;font-size:11px;font-weight:700;color:var(--cyan-ink);letter-spacing:.02em}
+  .timeline .dot.hl small{color:var(--gold-ink)}
+  .phases-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;flex:1}
+  .ph{border:1px solid var(--line);border-radius:8px;padding:10px 12px;background:#FBFCFD;display:flex;flex-direction:column}
+  .ph .f{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--faint)}
+  .ph h4{font-size:14px;font-weight:700;line-height:1.2;color:var(--navy);margin:3px 0 6px;min-height:34px}
+  .ph ul{list-style:none;display:grid;gap:4px}
+  .ph li{font-size:11.6px;line-height:1.32;color:var(--graphite);padding-left:11px;position:relative}
+  .ph li::before{content:"";position:absolute;left:0;top:6px;width:5px;height:5px;background:var(--cyan);transform:rotate(45deg)}
+  .ph .ms{margin-top:auto;display:flex;align-items:center;gap:7px;font-size:11.4px;font-weight:700;color:var(--navy);
+    border-top:1px dashed var(--line);padding-top:7px}
+  .ph .ms svg{width:14px;height:14px;color:var(--gold)}
+  .ph.hl{background:var(--gold-soft);border-color:#E7D5A4;box-shadow:inset 0 3px 0 var(--gold)}
+  .ph.hl .f{color:var(--gold-ink)}
+  .ph.hl .ms{border-top-color:#E2CD95}
+  .badge{display:inline-block;font-size:9.5px;font-weight:800;letter-spacing:.1em;color:var(--navy);background:var(--gold);border-radius:3px;padding:2px 5px;margin-left:6px;vertical-align:1px}
+
+  /* Resultados */
+  .kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+  .kpi{border-radius:7px;padding:7px 10px;background:var(--navy);color:#fff}
+  .kpi .v{font-size:21px;font-weight:800;line-height:1;letter-spacing:-.01em;color:#fff}
+  .kpi .v small{font-size:12px;font-weight:700;color:#9FD9E8;margin-left:1px}
+  .kpi .t{font-size:10.5px;color:#BFCBDB;margin-top:3px;line-height:1.2;white-space:nowrap}
+  .kpi.g{background:var(--gold-soft);color:var(--ink);box-shadow:inset 0 0 0 1px #E7D5A4}
+  .kpi.g .v{color:var(--gold-ink)} .kpi.g .v small{color:var(--gold-ink)} .kpi.g .t{color:var(--graphite)}
+  .bens{display:grid;grid-template-columns:1fr 1fr;gap:5px 10px;margin-top:9px}
+  .ben{display:flex;gap:6px;align-items:flex-start;font-size:11.4px;white-space:nowrap;line-height:1.3;color:var(--graphite)}
+  .ben svg{width:15px;height:15px;color:var(--cyan);margin-top:1px}
+  .risks{margin-top:auto;border-top:1px solid var(--line);padding-top:7px}
+  .risks .h{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--muted);text-transform:uppercase;margin-bottom:5px}
+  .chips{display:flex;flex-wrap:wrap;gap:5px}
+  .chip{font-size:10.5px;font-weight:600;border-radius:20px;padding:2px 8px;background:var(--bg);color:var(--graphite);border:1px solid var(--line)}
+  .chip.c{background:var(--navy);color:#fff;border-color:var(--navy)}
+  .chip.c::before{content:"●";color:var(--gold);margin-right:5px;font-size:9px}
+
+  /* Rodapé */
+  .foot{position:absolute;left:28px;right:28px;bottom:0;height:30px;display:flex;align-items:center;gap:18px;font-size:10.8px;color:var(--muted)}
+  .foot .gov{display:flex;align-items:center;gap:7px;flex:1;justify-content:center}
+  .foot .gov svg{width:14px;height:14px;color:var(--navy)}
+  .foot b{color:var(--graphite)}
+
+  /* ---------- Impressão: 1 página 16:9 ---------- */
+  @page{size:1600px 900px;margin:0}
+  @media print{
+    html,body{width:1600px;height:900px;background:#fff;overflow:hidden}
+    .stage{width:1600px;height:900px}
+    .canvas{left:0;top:0;transform:none!important;box-shadow:none}
+    .print-btn{display:none!important}
+  }
+</style>
+</head>
+<body>
+
+<!-- Ícones -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-users" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></symbol>
+    <symbol id="i-face" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2"/><path d="M17 3h2a2 2 0 0 1 2 2v2"/><path d="M21 17v2a2 2 0 0 1-2 2h-2"/><path d="M7 21H5a2 2 0 0 1-2-2v-2"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><path d="M9 9h.01"/><path d="M15 9h.01"/></symbol>
+    <symbol id="i-portal" viewBox="0 0 24 24"><path d="M3 21h18"/><path d="M5 21V4h14v17"/><path d="M9 21V8h6v13"/><path d="M7 6.5h.01M17 6.5h.01"/></symbol>
+    <symbol id="i-retrieve" viewBox="0 0 24 24"><path d="M12 15V3"/><path d="m7 8 5-5 5 5"/><path d="M4 15v4a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="m8.5 12 2.5 2.5 4.5-5"/></symbol>
+    <symbol id="i-cpu" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><rect x="9" y="9" width="6" height="6"/><path d="M9 2v3M15 2v3M9 19v3M15 19v3M19 9h3M19 15h3M2 9h3M2 15h3"/></symbol>
+    <symbol id="i-net" viewBox="0 0 24 24"><rect x="16" y="16" width="6" height="6" rx="1"/><rect x="2" y="16" width="6" height="6" rx="1"/><rect x="9" y="2" width="6" height="6" rx="1"/><path d="M5 16v-3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v3"/><path d="M12 12V8"/></symbol>
+    <symbol id="i-cloud" viewBox="0 0 24 24"><path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z"/></symbol>
+    <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/><path d="m11 7-2 3h4l-2 3"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-6h4a6 6 0 0 1 6 6v1"/></symbol>
+    <symbol id="i-wrench" viewBox="0 0 24 24"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></symbol>
+    <symbol id="i-eye" viewBox="0 0 24 24"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></symbol>
+    <symbol id="i-building" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M9 22v-4h6v4"/><path d="M8 6h.01M12 6h.01M16 6h.01M8 10h.01M12 10h.01M16 10h.01M8 14h.01M12 14h.01M16 14h.01"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></symbol>
+    <symbol id="i-alert" viewBox="0 0 24 24"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><path d="M12 9v4M12 17h.01"/></symbol>
+    <symbol id="i-chart" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 16v-4M12 16V8M17 16v-7"/></symbol>
+    <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M2 12h20"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></symbol>
+    <symbol id="i-loop" viewBox="0 0 24 24"><path d="M3 12a9 9 0 0 1 15-6.7L21 8"/><path d="M21 3v5h-5"/><path d="M21 12a9 9 0 0 1-15 6.7L3 16"/><path d="M3 21v-5h5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></symbol>
+    <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><path d="M4 22v-7"/></symbol>
+    <symbol id="i-link" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></symbol>
+    <symbol id="i-print" viewBox="0 0 24 24"><path d="M6 9V2h12v7"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 26 14"><path d="M1 7h22"/><path d="m17 1.5 6 5.5-6 5.5"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+<div class="canvas" id="canvas">
+
+  <button class="print-btn" type="button" onclick="window.print()" title="Exportar ou imprimir em PDF (página única, paisagem)">
+    <svg class="i"><use href="#i-print"/></svg>Exportar / Imprimir PDF
+  </button>
+
+  <!-- 01 · VISÃO GERAL -->
+  <header class="hero">
+    <div class="hero-top">
+      <span class="k">Grupo SBS · Segurança e Telecom</span>
+      <span class="d">Anteprojeto · Novembro 2026</span>
+    </div>
+    <div class="hero-main">
+      <div class="brand">
+        <h1>PIC BA <span class="tag">VISÃO GERAL</span></h1>
+        <p>Ponto Integrado de Controle do Carnaval da Bahia</p>
+      </div>
+      <div class="why">
+        <div class="box">
+          <h3><svg class="i"><use href="#i-target"/></svg>OBJETIVO</h3>
+          <p>Controlar o acesso aos circuitos e gerir o fluxo de foliões com passagem individual inspecionada, infraestrutura redundante e monitoramento integrado.</p>
+        </div>
+        <div class="box p">
+          <h3><svg class="i"><use href="#i-alert"/></svg>PROBLEMA</h3>
+          <p>Volume extremo nos acessos, risco de superlotação, furtos e agressões — e pouca informação em tempo real para decidir onde agir.</p>
+        </div>
+      </div>
+      <div class="stat">
+        <div class="n">1,7 milhão</div>
+        <div class="l">de passagens em um único dia</div>
+        <div class="s">Circuito Dodô (Barra-Ondina) · 15/02/2026</div>
+        <div class="src">Fonte: balanço da Prefeitura e da PMBA, 16/02/2026</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="body">
+
+    <!-- 02 · FLUXO -->
+    <section class="card flow">
+      <div class="sec">
+        <span class="num">02</span><h2>Fluxo de funcionamento</h2>
+        <span class="sub">Uma passagem = um atendimento: face, pertences, faixa, sentido e horário sob o mesmo identificador</span>
+      </div>
+
+      <div class="lane"><svg class="i"><use href="#i-users"/></svg>Percurso do folião · módulo de passagem individual</div>
+      <div class="row5">
+        <div class="step">
+          <div class="hd"><span class="ico"><svg class="i"><use href="#i-users"/></svg></span><div><div class="no">ETAPA 1</div><h4>Fila e admissão</h4></div></div>
+          <ul><li>Gradis individualizam a fila</li><li>Limitador admite 1 por vez</li></ul>
+        </div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="step">
+          <div class="hd"><span class="ico"><svg class="i"><use href="#i-face"/></svg></span><div><div class="no">ETAPA 2</div><h4>Identificação e depósito</h4></div></div>
+          <ul><li>Câmera frontal registra a face</li><li>Pertences filmados na caixa</li></ul>
+        </div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="step">
+          <div class="hd"><span class="ico"><svg class="i"><use href="#i-portal"/></svg></span><div><div class="no">ETAPA 3</div><h4>Travessia no pórtico</h4></div></div>
+          <ul><li>Detector, sentido e horário</li><li class="loop"><svg class="i"><use href="#i-loop"/></svg>Metal? repete a leitura</li></ul>
+        </div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="step">
+          <div class="hd"><span class="ico"><svg class="i"><use href="#i-retrieve"/></svg></span><div><div class="no">ETAPA 4</div><h4>Retirada dos pertences</h4></div></div>
+          <ul><li>Itens recolhidos do lado interno</li><li>Imagem vinculada à face</li></ul>
+        </div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="step">
+          <div class="hd"><span class="ico"><svg class="i"><use href="#i-check"/></svg></span><div><div class="no">ETAPA 5</div><h4>Liberação e contagem</h4></div></div>
+          <ul><li>Travessia = 1 passagem</li><li>Faixa libera o próximo</li></ul>
+        </div>
+      </div>
+
+      <!-- barramento de eventos -->
+      <div class="bus">
+        <svg viewBox="0 0 1060 34" preserveAspectRatio="none" aria-hidden="true">
+          <g stroke="#18A8C8" stroke-width="1.6" fill="none" stroke-dasharray="4 4">
+            <path d="M92.4 0V12M311.2 0V12M530 0V12M748.8 0V12M967.6 0V12"/>
+            <path d="M92.4 12H967.6"/>
+          </g>
+          <path d="M92.4 12V28" stroke="#18A8C8" stroke-width="1.8"/>
+          <path d="M87.4 27l5 7 5-7z" fill="#18A8C8"/>
+        </svg>
+        <span class="lbl">Cada etapa envia eventos e imagens ao controlador local</span>
+      </div>
+
+      <div class="lane"><svg class="i"><use href="#i-net"/></svg>Circuito da informação · do portal à decisão</div>
+      <div class="row5">
+        <div class="node"><span class="ico"><svg class="i"><use href="#i-cpu"/></svg></span><div><b>Controlador local</b><span>Une eventos sob um ID único</span></div></div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="node"><span class="ico"><svg class="i"><use href="#i-net"/></svg></span><div><b>Rede própria</b><span>Fibra dupla, backbone privado</span></div></div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="node"><span class="ico"><svg class="i"><use href="#i-cloud"/></svg></span><div><b>Servidores e nuvem</b><span>Conciliam imagens e eventos</span></div></div>
+        <div class="arr"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="node"><span class="ico"><svg class="i"><use href="#i-monitor"/></svg></span><div><b>Central de monitoramento</b><span>Alerta com imagem e faixa</span></div></div>
+        <div class="arr" style="color:var(--gold)"><svg class="i"><use href="#i-arrow"/></svg></div>
+        <div class="node auth"><span class="ico"><svg class="i"><use href="#i-shield"/></svg></span><div><b>Decisão policial</b><span>Avalia e aciona a equipe</span></div></div>
+      </div>
+
+      <div class="outs">
+        <div class="out"><svg class="i"><use href="#i-chart"/></svg><span><b>Painel do comando:</b> entradas, saídas e espera a cada 15 min</span></div>
+        <div class="out"><svg class="i"><use href="#i-globe"/></svg><span><b>Portal público:</b> acessos abertos com menor espera</span></div>
+        <div class="out"><svg class="i"><use href="#i-loop"/></svg><span><b>Sem conexão:</b> fila local e conciliação sem duplicação</span></div>
+      </div>
+    </section>
+
+    <!-- 04 · ATORES -->
+    <section class="card actors">
+      <div class="sec">
+        <span class="num">04</span><h2>Atores e responsabilidades</h2>
+      </div>
+      <div class="legend" style="margin:-4px 0 8px 0">
+        <span><i style="background:var(--cyan)"></i>Operação técnica</span>
+        <span><i style="background:var(--gold)"></i>Autoridade pública</span>
+        <span><i style="background:var(--graphite)"></i>Público e parceiros</span>
+      </div>
+      <div class="list">
+        <div class="actor t"><span class="ico"><svg class="i"><use href="#i-wrench"/></svg></span><div><b>Grupo SBS · Hub Digital</b><span>Engenharia, telecom, redes e nuvem; instala e mantém</span></div></div>
+        <div class="actor t"><span class="ico"><svg class="i"><use href="#i-eye"/></svg></span><div><b>MIKE · Central SBS</b><span>Supervisiona a rede e aciona os técnicos</span></div></div>
+        <div class="actor a"><span class="ico"><svg class="i"><use href="#i-shield"/></svg></span><div><b>Central do Carnaval · PMBA</b><span>Avalia o alerta e decide o acionamento</span></div></div>
+        <div class="actor a"><span class="ico"><svg class="i"><use href="#i-face"/></svg></span><div><b>SSP-BA · Câmera Interativa</b><span>Consulta facial autorizada e homologada</span></div></div>
+        <div class="actor p"><span class="ico"><svg class="i"><use href="#i-building"/></svg></span><div><b>Prefeitura e parceiros locais</b><span>Definem acesso e fila; usam os boletins</span></div></div>
+        <div class="actor p"><span class="ico"><svg class="i"><use href="#i-user"/></svg></span><div><b>Folião</b><span>Deposita, atravessa e retira os pertences</span></div></div>
+      </div>
+      <div class="integ"><svg class="i"><use href="#i-link"/></svg><span><b>Integração:</b> o SBS garante os meios técnicos; a autoridade decide, por protocolo pactuado.</span></div>
+    </section>
+
+    <!-- 03 · FASES -->
+    <section class="card phases">
+      <div class="sec">
+        <span class="num">03</span><h2>Etapas e fases de execução</h2>
+        <span class="sub">Janelas indicativas, derivadas do encaminhamento do anteprojeto</span>
+      </div>
+      <div class="timeline">
+        <div class="rail"></div>
+        <div class="dots">
+          <div class="dot"><em>1</em><small>NOV–DEZ 2026</small></div>
+          <div class="dot"><em>2</em><small>DEZ 2026–JAN 2027</small></div>
+          <div class="dot hl"><em>3</em><small>CARNAVAL 2027</small></div>
+          <div class="dot"><em>4</em><small>PÓS-CARNAVAL 2027</small></div>
+          <div class="dot"><em>5</em><small>PRÓXIMAS EDIÇÕES</small></div>
+        </div>
+      </div>
+      <div class="phases-grid">
+        <div class="ph">
+          <div class="f">FASE 1</div><h4>Decisão e pactuação</h4>
+          <ul><li>Definir local, responsáveis e escopo</li><li>Pactuar protocolo com PMBA/SSP-BA</li><li>Reservar janela de engenharia</li></ul>
+          <div class="ms"><svg class="i"><use href="#i-flag"/></svg>Marco: piloto aprovado</div>
+        </div>
+        <div class="ph">
+          <div class="f">FASE 2</div><h4>Engenharia e prova de conceito</h4>
+          <ul><li>Montagem e integração</li><li>Ensaio de queda de fibra/energia</li><li>Treinamento das equipes</li></ul>
+          <div class="ms"><svg class="i"><use href="#i-flag"/></svg>Marco: faixa validada</div>
+        </div>
+        <div class="ph hl">
+          <div class="f">FASE 3 <span class="badge">PRIMEIRA APLICAÇÃO</span></div><h4>Piloto em Ondina</h4>
+          <ul><li>1 faixa no horário de pico</li><li>Ciclo medido nos 2 sentidos</li><li>Meta: 15 s por folião</li></ul>
+          <div class="ms"><svg class="i"><use href="#i-flag"/></svg>Marco: dados de turno real</div>
+        </div>
+        <div class="ph">
+          <div class="f">FASE 4</div><h4>Avaliação e decisão de escala</h4>
+          <ul><li>Vazão, espera e repetições</li><li>Qualidade do vínculo face–itens</li><li>Revisão da matriz de riscos</li></ul>
+          <div class="ms"><svg class="i"><use href="#i-flag"/></svg>Marco: escala e orçamento</div>
+        </div>
+        <div class="ph">
+          <div class="f">FASE 5</div><h4>Expansão ao circuito</h4>
+          <ul><li>De 6 a 20 faixas por acesso</li><li>Cobertura de todo o circuito</li><li>Portal público em tempo real</li></ul>
+          <div class="ms"><svg class="i"><use href="#i-flag"/></svg>Marco: operação integrada</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 05 · RESULTADOS -->
+    <section class="card results">
+      <div class="sec">
+        <span class="num">05</span><h2>Resultados esperados</h2>
+      </div>
+      <div class="kpis">
+        <div class="kpi g"><div class="v">15<small> s</small></div><div class="t">meta por folião</div></div>
+        <div class="kpi"><div class="v">240<small>/h</small></div><div class="t">passagens por faixa</div></div>
+        <div class="kpi"><div class="v">1.440<small>/h</small></div><div class="t">6 faixas · 10,68 m</div></div>
+        <div class="kpi"><div class="v">4.800<small>/h</small></div><div class="t">com 20 faixas</div></div>
+        <div class="kpi"><div class="v">15<small> min</small></div><div class="t">leitura do fluxo</div></div>
+        <div class="kpi g"><div class="v">P95</div><div class="t">alerta → acionamento</div></div>
+      </div>
+      <div class="bens">
+        <div class="ben"><svg class="i"><use href="#i-check"/></svg>Decisão policial com evidência</div>
+        <div class="ben"><svg class="i"><use href="#i-check"/></svg>Equipes guiadas pelo fluxo real</div>
+        <div class="ben"><svg class="i"><use href="#i-check"/></svg>Vínculo pessoa ↔ pertences</div>
+        <div class="ben"><svg class="i"><use href="#i-check"/></svg>Ocorrências por mil passagens</div>
+      </div>
+      <div class="risks">
+        <div class="h">Riscos endereçados</div>
+        <div class="chips">
+          <span class="chip c">Superlotação (crítico)</span>
+          <span class="chip">Furto</span>
+          <span class="chip">Agressão</span>
+          <span class="chip">Atraso no atendimento</span>
+          <span class="chip">Alocação de equipes</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="foot">
+    <span>Concepção: <b>Henrique Eduardo Weyll Wiering</b> · Engenharia e integração: <b>Grupo SBS</b></span>
+    <span class="gov"><svg class="i"><use href="#i-lock"/></svg>Gestores recebem dados agregados; imagens individuais exigem perfil autorizado, finalidade registrada e trilha de auditoria.</span>
+    <span>PIC BA · Anteprojeto</span>
+  </footer>
+
+</div>
+</div>
+
+<script>
+  (function(){
+    var c = document.getElementById('canvas');
+    function fit(){
+      var pad = 24;
+      var s = Math.min((window.innerWidth - pad) / 1600, (window.innerHeight - pad) / 900);
+      c.style.setProperty('--s', Math.max(s, 0.1));
+    }
+    window.addEventListener('resize', fit);
+    fit();
+  })();
+</script>
+</body>
+</html>
