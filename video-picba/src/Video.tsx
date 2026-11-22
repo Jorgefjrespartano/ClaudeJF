@@ -37,7 +37,7 @@ export const Video: React.FC = () => {
       <Chrome />
       <Captions />
       <Audio src={staticFile('narration.wav')} />
-      <Audio src={staticFile('music.wav')} volume={(f) => interpolate(f, [0, 20, TOTAL - 40, TOTAL], [0, 0.55, 0.55, 0], clamp)} />
+      <Audio src={staticFile('music.wav')} volume={(f) => interpolate(f, [0, 20, TOTAL - 40, TOTAL], [0, 0.08, 0.08, 0], clamp)} />
     </AbsoluteFill>
   );
 };
