@@ -1,0 +1,6 @@
+node_modules
+out/*
+!out/.keep
+public/voice/
+.env*
+public/music.wav

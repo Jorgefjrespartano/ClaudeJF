@@ -1,0 +1,17 @@
+{
+  "voice_id": "nPczCjzI2devNBz1zQrb",
+  "scenes": [
+    {"id": "c01", "block": "O PROBLEMA", "text": "Um milhão e setecentas mil passagens. Em um único dia, num só circuito do Carnaval."},
+    {"id": "c02", "block": "O PROBLEMA", "text": "Superlotação, furtos, agressões. E pouca informação em tempo real para decidir onde agir.", "tail": 0.6},
+    {"id": "c03", "block": "A SOLUÇÃO", "text": "O PIC BA, Ponto Integrado de Controle do Carnaval da Bahia, muda essa lógica:", "spoken": "O PIC Bê-Á, Ponto Integrado de Controle do Carnaval da Bahia, muda essa lógica:"},
+    {"id": "c04", "block": "A SOLUÇÃO", "text": "cada folião passa individualmente, é inspecionado, e cada passagem vira informação."},
+    {"id": "c05", "block": "COMO FUNCIONA", "text": "Na faixa, entra um por vez. A câmera registra o rosto, e os pertences são filmados na caixa."},
+    {"id": "c06", "block": "COMO FUNCIONA", "text": "No pórtico, o detector confere metal, sentido e horário. Se acusar metal, a leitura se repete."},
+    {"id": "c07", "block": "COMO FUNCIONA", "text": "Do outro lado, ele retira os pertences, já vinculados ao rosto. Uma passagem contada, e a faixa libera o próximo."},
+    {"id": "c08", "block": "COMO FUNCIONA", "text": "Tudo sob um mesmo identificador, por rede própria com fibra dupla, até a central de monitoramento."},
+    {"id": "c09", "block": "COMO FUNCIONA", "text": "Se algo exige atenção, o alerta chega com imagem e faixa. E a decisão é da polícia, por protocolo pactuado."},
+    {"id": "c10", "block": "IMPACTO", "text": "A meta: quinze segundos por folião. Duzentas e quarenta passagens por hora em cada faixa; até quatro mil e oitocentas, com vinte faixas."},
+    {"id": "c11", "block": "IMPACTO", "text": "Fluxo lido a cada quinze minutos, equipes onde a festa precisa, decisões com evidência. E privacidade, com acesso auditado às imagens."},
+    {"id": "c12", "block": "", "text": "PIC BA. Mais controle no acesso, mais segurança para quem faz a festa. Primeiro piloto: Carnaval 2027, em Ondina.", "spoken": "PIC Bê-Á. Mais controle no acesso, mais segurança para quem faz a festa. Primeiro piloto: Carnaval dois mil e vinte e sete, em Ondina.", "tail": 1.3}
+  ]
+}
