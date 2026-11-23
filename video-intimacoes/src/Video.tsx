@@ -58,7 +58,9 @@ const Backdrop: React.FC = () => {
 const Fade: React.FC<{first: boolean; len: number; children: React.ReactNode}> = ({first, len, children}) => {
   const f = useCurrentFrame();
   const zoom = interpolate(f, [0, len], [1, 1.03], clamp); // aproximação suave contínua
-  return <AbsoluteFill style={{opacity: first ? 1 : interpolate(f, [0, XF], [0, 1], clamp), transform: `scale(${zoom})`}}>{children}</AbsoluteFill>;
+  const fadeIn = first ? 1 : interpolate(f, [XF / 2, XF], [0, 1], clamp);
+  const fadeOut = interpolate(f, [len, len + XF / 2], [1, 0], clamp); // a cena que sai some enquanto a próxima entra
+  return <AbsoluteFill style={{opacity: fadeIn * fadeOut, transform: `scale(${zoom})`}}>{children}</AbsoluteFill>;
 };
 
 export const Video: React.FC = () => {
