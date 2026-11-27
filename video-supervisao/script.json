@@ -1,0 +1,18 @@
+{
+  "voice_id": "gAnfddR80yOm2fEM8McL",
+  "scenes": [
+    {"id": "s1", "block": "", "text": "Pais de adolescentes: o Instagram tem um alerta que pode avisar quando seu filho precisa de ajuda. Mas ele só funciona se você ativar.", "tail": 0.35},
+    {"id": "s2", "block": "", "text": "Eu sou o Delegado Jorge Figueiredo, e vou te mostrar como ativar.", "tail": 0.35},
+    {"id": "s3", "block": "", "text": "A Meta avisa o responsável quando o adolescente tenta pesquisar várias vezes, em pouco tempo, termos ligados a suicídio ou automutilação. E agora também quando uma conversa dele com a inteligência artificial da Meta indica risco. Isso já funciona no Brasil.", "tail": 0.35},
+    {"id": "s4", "block": "", "text": "Fique tranquilo: você não lê as mensagens dele. Recebe só o alerta, no aplicativo, por e-mail, SMS ou WhatsApp. Por isso, mantenha seus contatos atualizados.", "spoken": "Fique tranquilo: você não lê as mensagens dele. Recebe só o alerta, no aplicativo, por e-mail, ésse eme ésse ou WhatsApp. Por isso, mantenha seus contatos atualizados.", "tail": 0.35},
+    {"id": "s5", "block": "", "text": "E tem mais: pelo ECA Digital, o responsável pode ativar essa supervisão. Vamos lá.", "spoken": "E tem mais: pelo Éca Digital, o responsável pode ativar essa supervisão. Vamos lá.", "tail": 0.8},
+    {"id": "p1", "block": "", "text": "Um: no seu Instagram, toque no seu perfil.", "tail": 0.8},
+    {"id": "p2", "block": "", "text": "Dois: toque nas três linhas, no canto superior direito.", "tail": 0.8},
+    {"id": "p3", "block": "", "text": "Três: entre em 'Para famílias' e depois em 'Supervisão'.", "spoken": "Três: entre em Para famílias, e depois em Supervisão.", "tail": 0.8},
+    {"id": "p4", "block": "", "text": "Quatro: toque em 'Criar convite' e escolha a conta do seu filho. Você precisa seguir essa conta.", "spoken": "Quatro: toque em Criar convite, e escolha a conta do seu filho. Você precisa seguir essa conta.", "tail": 0.8},
+    {"id": "p5", "block": "", "text": "Cinco: confira se a conta dele aparece como supervisionada. Se estiver pendente, peça para ele aceitar.", "tail": 0.5},
+    {"id": "s7", "block": "", "text": "Os nomes podem mudar conforme a versão do aplicativo.", "tail": 0.5},
+    {"id": "s8", "block": "", "text": "Chegou um alerta? Não é diagnóstico. Converse com calma, escute sem julgar e procure ajuda profissional. Em crise, ligue um, oito, oito, o CVV. É gratuito e funciona vinte e quatro horas. E se não chegar alerta, não quer dizer que está tudo bem: conversar continua sendo a melhor proteção.", "spoken": "Chegou um alerta? Não é diagnóstico. Converse com calma, escute sem julgar e procure ajuda profissional. Em crise, ligue um, oito, oito, o cê vê vê. É gratuito e funciona vinte e quatro horas. E se não chegar alerta, não quer dizer que está tudo bem: conversar continua sendo a melhor proteção.", "tail": 0.4},
+    {"id": "s9", "block": "", "text": "Proteger também é acompanhar. Salve este vídeo e mande para quem tem filho adolescente.", "tail": 1.6}
+  ]
+}
